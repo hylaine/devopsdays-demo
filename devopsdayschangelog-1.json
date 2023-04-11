@@ -1,0 +1,258 @@
+{ "databaseChangeLog": [
+  {
+    "changeSet": {
+      "id": "1681229043043-1",
+      "author": "ChaseCupp (generated)",
+      "changes": [
+        {
+          "createTable": {
+            "columns": [
+              {
+                "column": {
+                  "autoIncrement": true,
+                  "computed": false,
+                  "constraints": {
+                    "nullable": false,
+                    "primaryKey": true,
+                    "primaryKeyName": "Pk_clients"
+                  },
+                  "name": "Id",
+                  "type": "int"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "name": "ClientName",
+                  "type": "varchar(100)"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "name": "SalesforceCustomerId",
+                  "type": "int"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "name": "CreatedDatetime",
+                  "type": "datetime"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "name": "CreatedBy",
+                  "type": "varchar(50)"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "name": "LastUpdatedDatetime",
+                  "type": "datetime"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "name": "LastUpdatedBy",
+                  "type": "varchar(50)"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "defaultValueComputed": "'false'",
+                  "defaultValueConstraintName": "DF__Client__DeleteFl__37A5467C",
+                  "name": "DeleteFlag",
+                  "type": "bit"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "name": "DeleteDatetime",
+                  "type": "datetime"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "name": "ClientStatus",
+                  "type": "varchar(50)"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "name": "IndustryType",
+                  "type": "nvarchar(100)"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "name": "Market",
+                  "type": "nvarchar(100)"
+                }
+              }
+            ]
+            ,
+            "tableName": "Client"
+          }
+        }
+      ]
+      
+    }
+  },
+  
+  {
+    "changeSet": {
+      "id": "1681229043043-2",
+      "author": "ChaseCupp (generated)",
+      "changes": [
+        {
+          "createTable": {
+            "columns": [
+              {
+                "column": {
+                  "autoIncrement": true,
+                  "computed": false,
+                  "constraints": {
+                    "nullable": false,
+                    "primaryKey": true,
+                    "primaryKeyName": "Pk_projects"
+                  },
+                  "name": "Id",
+                  "type": "int"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "name": "ProjectName",
+                  "type": "varchar(100)"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "name": "ProjectNumber",
+                  "type": "varchar(50)"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "name": "ProjectDescription",
+                  "type": "varchar(5000)"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "name": "ProjectStatus",
+                  "type": "varchar(40)"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "name": "ProjectStatusSummary",
+                  "type": "varchar(MAX)"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "name": "ProjectStartDate",
+                  "type": "date"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "name": "ProjectEndDate",
+                  "type": "date"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "constraints": {
+                    "nullable": false
+                  },
+                  "name": "ClientId",
+                  "type": "int"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "defaultValueComputed": "'false'",
+                  "defaultValueConstraintName": "DF__Project__DeleteF__3A81B327",
+                  "name": "DeleteFlag",
+                  "type": "bit"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "name": "DeleteDatetime",
+                  "type": "datetime"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "defaultValueComputed": "'true'",
+                  "defaultValueConstraintName": "DF__Project__ActiveF__3B75D760",
+                  "name": "ActiveFlag",
+                  "type": "bit"
+                }
+              },
+              {
+                "column": {
+                  "computed": false,
+                  "name": "BillingType",
+                  "type": "varchar(50)"
+                }
+              }
+            ]
+            ,
+            "tableName": "Project"
+          }
+        }
+      ]
+      
+    }
+  },
+  
+  {
+    "changeSet": {
+      "id": "1681229043043-3",
+      "author": "ChaseCupp (generated)",
+      "changes": [
+        {
+          "addForeignKeyConstraint": {
+            "baseColumnNames": "ClientId",
+            "baseTableName": "Project",
+            "constraintName": "Fk_projects_client_id",
+            "deferrable": false,
+            "initiallyDeferred": false,
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "referencedColumnNames": "Id",
+            "referencedTableName": "Client",
+            "validate": true
+          }
+        }
+      ]
+      
+    }
+  }
+  
+]}

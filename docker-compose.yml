@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  sqlserver:
+    build: .
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: DevOpsDaysP4ssword!
+    ports:
+      - "1433:1433"
