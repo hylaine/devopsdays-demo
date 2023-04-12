@@ -26,7 +26,7 @@ RUN chown mssql /usr/src/app
 USER mssql
 
 # Expose SQL Server port
-EXPOSE 14330
+EXPOSE 1433
 
 # Run SQL Server initialization script on startup
 ENTRYPOINT ["/bin/bash", "/usr/src/app/sqlserver-entrypoint.sh"]
