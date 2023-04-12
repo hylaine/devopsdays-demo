@@ -15,12 +15,9 @@ Once the SQL Server is running, you'll still need to create the database. Connec
 * server: localhost
 * trust server certificate: true
 
-Run `instantiate.sql` against the database.
+Run `instantiate.sql` against the DB server to create the initial DB, required for Liquibase to target it.
 
 ## Run the Changesets
 
 Each changelog has to be executed separately. From this directory, execute:
-`./Liquibase/liquibase update --defaultsFile="liquibase.properties" --changeLogFile="devopsdayschangelog-1.json" --log-file=logs/liquibase-update.log`
-
-Once this command is complete, you can target the next changelog:
-`./Liquibase/liquibase update --defaultsFile="liquibase.properties" --changeLogFile="devopsdayschangelog-2.json" --log-file=logs/liquibase-update.log`
+`./Liquibase/liquibase update --defaultsFile="liquibase.properties" --changeLogFile="devopsdayschangelog.json" --log-file=logs/liquibase-update.log`
