@@ -2,7 +2,7 @@
 
 ## Run the Docker Image
 
-The docker-compose file will pull down and start a SQL Server container. From this directory, execute:
+The docker-compose file will pull down and start a SQL Server container. From repo's root directory, execute:
 
 `docker-compose up`
 
@@ -12,10 +12,10 @@ Once the SQL Server is running, you'll still need to create the database. Connec
 
 * username: sa
 * password: DevOpsDaysP4ssword!
-* server: localhost
+* server: localhost,1433
 * trust server certificate: true
 
-Run `instantiate.sql` against the DB server to create the initial DB, required for Liquibase to target it.
+The DB Server will already have an initial DB, DevOpsDays, created via the Dockerfile.
 
 ## Run the Parent Changelog
 
