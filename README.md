@@ -17,7 +17,18 @@ Once the SQL Server is running, you'll still need to create the database. Connec
 
 Run `instantiate.sql` against the DB server to create the initial DB, required for Liquibase to target it.
 
-## Run the Changesets
+## Run the Parent Changelog
 
-Each changelog has to be executed separately. From this directory, execute:
-`./Liquibase/liquibase update --defaultsFile="liquibase.properties" --changeLogFile="devopsdayschangelog.json" --log-file=logs/liquibase-update.log`
+A parent/master changelog (specified in liquibase.properties) will run child changelogs in the folder, `changelogs` in alphabetical order. From this directory, execute:
+`./Liquibase/liquibase update --defaultsFile="liquibase.properties" --log-file=logs/liquibase-update.log`
+
+If you have just one changelog in this folder, it will execute.
+
+## Add another changelog
+
+You can create your own custom changelog to experiment, but you can also use the examples provided of well-formed and ill-formed changelogs. 
+
+Add these to the changelog folder and test the liquibase update command, the same as before.
+
+## Something went wrong....
+No worries. We've included a basic script to delete most of the tables in the database, including the meta-tables for Liquibase. You can execute that and try again.
