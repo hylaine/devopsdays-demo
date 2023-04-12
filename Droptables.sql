@@ -7,3 +7,4 @@ TRUNCATE TABLE dbo.Client
 GO
 DROP TABLE dbo.Project
 DROP TABLE dbo.Client
+DROP TABLE dbo.ClientBackup

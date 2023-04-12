@@ -1,20 +1,10 @@
 name: Build and Test
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
-    #services:
-      #sql-server:
-        #image: devopsdays-sqlserver-image
-        #env:
-          #ACCEPT_EULA: "Y"
-          #SA_PASSWORD: "DevOpsDaysP4ssword"
-        #ports:
-          #- 1433:1433
-        #options: --health-cmd "sqlcmd -U sa -P DevOpsDaysP4ssword -Q \"SELECT 1\"" --health-interval 10s --health-timeout 5s --health-retries 3
 
     steps:
       - name: Checkout code
@@ -22,8 +12,7 @@ jobs:
 
       - name: Build SQL Server image
         run: |
-          docker build -f Dockerfile.sqlserver -t devopsdays-sqlserver-image .
-          docker run -d --name devopsdays-sqlserver-container -p 1433:1433 devopsdays-sqlserver-image
+          docker-compose up -d
 
       - name: Wait for SQL Server to Startup
         run: sleep 75s
@@ -31,8 +20,8 @@ jobs:
 
       - name: Attempt to Apply Liquibase Changesets
         run: |
-          ./Liquibase/liquibase --defaultsFile="liquibase.properties" --changeLogFile="devopsdayschangelog-actions.json" generate-changelog
-          ./Liquibase/liquibase --defaultsFile="liquibase.properties" --log-file=logs/liquibase-update.log update 
+          ./Liquibase/liquibase --defaultsFile="liquibase.properties" --log-file=logs/liquibase-update.log update
+          ./Liquibase/liquibase --defaultsFile="liquibase.properties" --changeLogFile="devopsdayschangelog.json" --log-file=logs/liquibase-update.log update 
 
               # Check if update was successful
               if [ $? -eq 0 ]; then
@@ -47,32 +36,3 @@ jobs:
         with:
           name: liquibase-update-log-${{ github.run_number }}-${{ github.run_id }}-${{ github.job }}-${{ env.GITHUB_REF_SLUG }}-${{ env.GITHUB_SHA }}
           path: logs/liquibase-update.log
-
-      # - name: Build Liquibase image
-      #   run: docker build -f Dockerfile.liquibase -t devopsdays-liquibase-image .
-
-      # - name: Run Liquibase update
-      #   run: |
-      #     docker run --rm \
-      #       --link devopsdays-sqlserver-container:sql-server \
-      #       -v devopsdayschangelog.json:/usr/src/app/devopsdayschangelog.json \
-      #       devopsdays-liquibase-image update
-
-      # - name: Run Liquibase update
-      #   run: |
-      #     docker run \
-      #       --rm \
-      #       --network host \
-      #       -v /Liquibase:/liquibase \
-      #       -v Liquibase/changelogs/liquibase-update.log:/liquibase-update.log \
-      #       devopsdays-liquibase-image \
-      #       --changeLogFile=/usr/src/app/devopsdayschangelog.json \
-      #       --url=jdbc:sqlserver://localhost:1433 \
-      #       --username=sa \
-      #       --password=DevOpsDaysP4ssword! \
-      #       update > /liquibase-update.log
-      #     if [ $? -eq 0 ]; then
-      #       echo "Liquibase update successful!"
-      #     else
-      #       echo "Liquibase update failed. See liquibase-update.log for details."
-      #     fi
