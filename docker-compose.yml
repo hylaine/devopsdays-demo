@@ -6,4 +6,4 @@ services:
       ACCEPT_EULA: Y
       SA_PASSWORD: DevOpsDaysP4ssword!
     ports:
-      - "1433:1433"
+      - "14330:14330"
