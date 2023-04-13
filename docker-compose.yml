@@ -1,6 +1,7 @@
 version: '3.8'
-services:
+services:  
   sqlserver:
+    platform: linux/amd64
     build: .
     environment:
       ACCEPT_EULA: Y
