@@ -1,13 +1,26 @@
 version: '3.8'
+
 services:  
+
   sqlserver:
     platform: linux/amd64
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile
     environment:
       ACCEPT_EULA: Y
       SA_PASSWORD: DevOpsDaysP4ssword!
     ports:
       - "1433:1433"
+    network_mode: "host"
+
   liquibase:
-    image: 'liquibase/liquibase'
-    container_name: devopsdaysliquibase
+    build:
+      context: .
+      dockerfile: Dockerfile.liqui
+    network_mode: "host"
+    depends_on: 
+      - sqlserver
+    volumes:
+      - ./changelog:/liquibase/changelog
+    command: --defaults-file=/liquibase/changelog/liquibase.properties update

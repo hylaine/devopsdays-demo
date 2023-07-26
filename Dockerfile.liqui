@@ -1,0 +1,5 @@
+# Base image
+FROM liquibase/liquibase:latest-alpine
+
+#copy changelog folder into image
+COPY ./changelog /liquibase/changelog
