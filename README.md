@@ -34,6 +34,12 @@ For Linux:
 For Windows:
 `Liquibase\liquibase update --defaultsFile="liquibase.properties" --log-file=logs/liquibase-update.log`
 
+`docker run --rm --net="host" -v ${PWD}:/liquibase/changelog --defaultsFile=/liquibase/changelog/liquibase.properties --changeLogFile=/changelog/rootchangelog.json generate-changelog`
+
+--Aaron's Theory: Move required meta-files into an isolated folder to mount and then 
+
+`docker run --rm --net="host" -v ${PWD}:/liquibase/changelog -v $PWD/changelogs:/liquibase/changelog/changelogs liquibase/liquibase --defaultsFile=/liquibase/changelog/liquibase.properties --changeLogFile=/changelog/rootchangelog.json update`
+
 If you have just one changelog in this folder, it will execute.
 
 ## Add another changelog
