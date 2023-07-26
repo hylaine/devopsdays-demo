@@ -8,3 +8,6 @@ services:
       SA_PASSWORD: DevOpsDaysP4ssword!
     ports:
       - "1433:1433"
+  liquibase:
+    image: 'liquibase/liquibase'
+    container_name: devopsdaysliquibase
