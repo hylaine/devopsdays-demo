@@ -4,43 +4,36 @@
 You'll want to install:
 
 * A SQL Server browser GUI. We suggest Azure Data Studio, but SSMS works too.
-* The JDK with JAVA_HOME added to path. We suggest OpenJDK
 * Docker. This was tested with v4.17.0
 
 ## Run the Docker Image
 
-The docker-compose file will pull down and start a SQL Server container. From repo's root directory, execute:
+The docker-compose file will pull down and start a SQL Server container, along with the Liquibase container that includes the Liquibase runtime and its dependencies. From repo's root directory, execute:
 
 `docker-compose up`
 
 ## Check connections and spin up the DB
 
-Once the SQL Server is running, you'll still need to create the database. Connect with the following info (also in the docker-compose file):
+Once the SQL Server is running, you will connect with the following info (also in the docker-compose file):
 
 * username: sa
 * password: DevOpsDaysP4ssword!
 * server: localhost,1433
 * trust server certificate: true
 
-The DB Server will already have an initial DB, DevOpsDays, created via the Dockerfile => `sqlserver-entrypoint.sh` => `Instantiate.sql`.
+The DB Server should already have an initial DB, DevOpsDays, created via the Dockerfile => `sqlserver-entrypoint.sh` => `Instantiate.sql`. If it doesn't, run the script manually against the server.
 
 ## Run the Parent Changelog
 
-A parent/master changelog (specified in liquibase.properties) will run child changelogs in the folder, `changelogs` in alphabetical order. From this directory, execute:
+A parent/master changelog (specified in liquibase.properties) will run child changelogs in the folder, `changelog/changelogs` in alphabetical order. The `liquibase.properties` file indicates which parent changelog file is being used, and we specify the properties file that the docker container is using. (Notice the volume mount part of the command!)
+
+From this directory, execute:
 
 For Linux:
-`./Liquibase/liquibase update --defaultsFile="liquibase.properties" --log-file=logs/liquibase-update.log`
+`docker run --rm --net="host" -v ./changelog:/liquibase/changelog liquibase/liquibase --defaults-file=/liquibase/changelog/liquibase.properties update`
 
 For Windows:
-`Liquibase\liquibase update --defaultsFile="liquibase.properties" --log-file=logs/liquibase-update.log`
-
-`docker run --rm --net="host" -v ${PWD}:/liquibase/changelog --defaultsFile=/liquibase/changelog/liquibase.properties --changeLogFile=/changelog/rootchangelog.json generate-changelog`
-
---Aaron's Theory: Move required meta-files into an isolated folder to mount and then 
-
-`docker run --rm --net="host" -v ${PWD}:/liquibase/changelog -v $PWD/changelogs:/liquibase/changelog/changelogs liquibase/liquibase --defaultsFile=/liquibase/changelog/liquibase.properties --changeLogFile=/changelog/rootchangelog.json update`
-
-If you have just one changelog in this folder, it will execute.
+`docker run --rm --net="host" -v ${PWD}/changelog:/liquibase/changelog liquibase/liquibase --defaults-file=/liquibase/changelog/liquibase.properties update`
 
 ## Add another changelog
 

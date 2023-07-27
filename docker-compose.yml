@@ -23,4 +23,5 @@ services:
       - sqlserver
     volumes:
       - ./changelog:/liquibase/changelog
-    command: --defaults-file=/liquibase/changelog/liquibase.properties update
+    # command: --defaults-file=/liquibase/changelog/liquibase.properties update 
+    # This command is commented out for the demo, but can be enabled for a real dev-ops pipeline.
