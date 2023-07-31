@@ -30,10 +30,10 @@ A parent/master changelog (specified in liquibase.properties) will run child cha
 From this directory, execute:
 
 For Linux:
-`docker run --rm --net="host" -v ./changelog:/liquibase/changelog liquibase/liquibase --defaults-file=/liquibase/changelog/liquibase.properties update`
+`docker run --rm --net="host" -v ./changelog:/liquibase/changelog liquibase/liquibase:latest-alpine --defaults-file=/liquibase/changelog/liquibase.properties update`
 
 For Windows:
-`docker run --rm --net="host" -v ${PWD}/changelog:/liquibase/changelog liquibase/liquibase --defaults-file=/liquibase/changelog/liquibase.properties update`
+`docker run --rm --net="host" -v ${PWD}/changelog:/liquibase/changelog liquibase/liquibase:latest-alpine --defaults-file=/liquibase/changelog/liquibase.properties update`
 
 ## Add another changelog
 

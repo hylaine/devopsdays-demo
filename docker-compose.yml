@@ -3,7 +3,7 @@ version: '3.8'
 services:  
 
   sqlserver:
-    platform: linux/amd64
+    platform: linux/amd64    
     build: 
       context: .
       dockerfile: Dockerfile
@@ -12,13 +12,13 @@ services:
       SA_PASSWORD: DevOpsDaysP4ssword!
     ports:
       - "1433:1433"
-    network_mode: "host"
+    network_mode: "bridge"
 
   liquibase:
     build:
       context: .
       dockerfile: Dockerfile.liqui
-    network_mode: "host"
+    network_mode: "bridge"
     depends_on: 
       - sqlserver
     volumes:
