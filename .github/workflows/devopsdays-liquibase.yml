@@ -20,8 +20,7 @@ jobs:
 
       - name: Attempt to Apply Liquibase Changesets
         run: |
-          ./Liquibase/liquibase --defaultsFile="liquibase.properties" --log-file=logs/liquibase-update.log update
-          ./Liquibase/liquibase --defaultsFile="liquibase.properties" --changeLogFile="devopsdayschangelog.json" --log-file=logs/liquibase-update.log update 
+          docker run --rm --net="host" -v ./changelog:/liquibase/changelog liquibase/liquibase:latest-alpine --defaults-file=/liquibase/changelog/liquibase.properties update
 
               # Check if update was successful
               if [ $? -eq 0 ]; then
