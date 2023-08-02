@@ -222,3 +222,79 @@ Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: There is already an 
 	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:441)
 	... 80 more
 
+[2023-04-12 15:46:19] SEVERE [liquibase.integration] Connection could not be created to jdbc:sqlserver://localhost:14330;database=DevOpsDays;encrypt=false; with driver com.microsoft.sqlserver.jdbc.SQLServerDriver.  Cannot open database "DevOpsDays" requested by the login. The login failed. ClientConnectionId:d5e5fd6f-71a6-48f9-af2f-5ba31dbef30f
+liquibase.exception.CommandExecutionException: liquibase.exception.DatabaseException: liquibase.exception.DatabaseException: liquibase.exception.DatabaseException: liquibase.exception.DatabaseException: Connection could not be created to jdbc:sqlserver://localhost:14330;database=DevOpsDays;encrypt=false; with driver com.microsoft.sqlserver.jdbc.SQLServerDriver.  Cannot open database "DevOpsDays" requested by the login. The login failed. ClientConnectionId:d5e5fd6f-71a6-48f9-af2f-5ba31dbef30f
+	at liquibase.command.CommandScope.execute(CommandScope.java:209)
+	at liquibase.integration.commandline.CommandRunner.call(CommandRunner.java:55)
+	at liquibase.integration.commandline.CommandRunner.call(CommandRunner.java:24)
+	at picocli.CommandLine.executeUserObject(CommandLine.java:2041)
+	at picocli.CommandLine.access$1500(CommandLine.java:148)
+	at picocli.CommandLine$RunLast.executeUserObjectOfLastSubcommandWithSameParent(CommandLine.java:2461)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2453)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2415)
+	at picocli.CommandLine$AbstractParseResultHandler.execute(CommandLine.java:2273)
+	at picocli.CommandLine$RunLast.execute(CommandLine.java:2417)
+	at picocli.CommandLine.execute(CommandLine.java:2170)
+	at liquibase.integration.commandline.LiquibaseCommandLine.lambda$null$2(LiquibaseCommandLine.java:367)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:172)
+	at liquibase.integration.commandline.LiquibaseCommandLine.lambda$execute$3(LiquibaseCommandLine.java:332)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:172)
+	at liquibase.integration.commandline.LiquibaseCommandLine.execute(LiquibaseCommandLine.java:330)
+	at liquibase.integration.commandline.LiquibaseCommandLine.main(LiquibaseCommandLine.java:91)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at liquibase.integration.commandline.LiquibaseLauncher.main(LiquibaseLauncher.java:107)
+Caused by: liquibase.exception.DatabaseException: liquibase.exception.DatabaseException: liquibase.exception.DatabaseException: liquibase.exception.DatabaseException: Connection could not be created to jdbc:sqlserver://localhost:14330;database=DevOpsDays;encrypt=false; with driver com.microsoft.sqlserver.jdbc.SQLServerDriver.  Cannot open database "DevOpsDays" requested by the login. The login failed. ClientConnectionId:d5e5fd6f-71a6-48f9-af2f-5ba31dbef30f
+	at liquibase.integration.commandline.CommandLineUtils.createDatabaseObject(CommandLineUtils.java:142)
+	at liquibase.integration.commandline.Main.doMigration(Main.java:1501)
+	at liquibase.integration.commandline.Main$1.lambda$run$0(Main.java:415)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.integration.commandline.Main$1.run(Main.java:414)
+	at liquibase.integration.commandline.Main$1.run(Main.java:231)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:172)
+	at liquibase.integration.commandline.Main.run(Main.java:231)
+	at liquibase.command.AbstractCliWrapperCommandStep.run(AbstractCliWrapperCommandStep.java:32)
+	at liquibase.command.CommandScope.execute(CommandScope.java:195)
+	... 23 more
+Caused by: liquibase.exception.DatabaseException: liquibase.exception.DatabaseException: liquibase.exception.DatabaseException: Connection could not be created to jdbc:sqlserver://localhost:14330;database=DevOpsDays;encrypt=false; with driver com.microsoft.sqlserver.jdbc.SQLServerDriver.  Cannot open database "DevOpsDays" requested by the login. The login failed. ClientConnectionId:d5e5fd6f-71a6-48f9-af2f-5ba31dbef30f
+	at liquibase.database.DatabaseFactory.openConnection(DatabaseFactory.java:221)
+	at liquibase.database.DatabaseFactory.openConnection(DatabaseFactory.java:179)
+	at liquibase.database.DatabaseFactory.openDatabase(DatabaseFactory.java:144)
+	at liquibase.integration.commandline.CommandLineUtils.createDatabaseObject(CommandLineUtils.java:96)
+	... 36 more
+Caused by: liquibase.exception.DatabaseException: liquibase.exception.DatabaseException: Connection could not be created to jdbc:sqlserver://localhost:14330;database=DevOpsDays;encrypt=false; with driver com.microsoft.sqlserver.jdbc.SQLServerDriver.  Cannot open database "DevOpsDays" requested by the login. The login failed. ClientConnectionId:d5e5fd6f-71a6-48f9-af2f-5ba31dbef30f
+	at liquibase.database.ConnectionServiceFactory.create(ConnectionServiceFactory.java:35)
+	at liquibase.database.DatabaseFactory.openConnection(DatabaseFactory.java:218)
+	... 39 more
+Caused by: liquibase.exception.DatabaseException: Connection could not be created to jdbc:sqlserver://localhost:14330;database=DevOpsDays;encrypt=false; with driver com.microsoft.sqlserver.jdbc.SQLServerDriver.  Cannot open database "DevOpsDays" requested by the login. The login failed. ClientConnectionId:d5e5fd6f-71a6-48f9-af2f-5ba31dbef30f
+	at liquibase.database.jvm.JdbcConnection.open(JdbcConnection.java:91)
+	at com.datical.liquibase.ext.database.jvm.ProJdbcConnection.open(Unknown Source)
+	at liquibase.database.ConnectionServiceFactory.create(ConnectionServiceFactory.java:32)
+	... 40 more
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot open database "DevOpsDays" requested by the login. The login failed. ClientConnectionId:d5e5fd6f-71a6-48f9-af2f-5ba31dbef30f
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:265)
+	at com.microsoft.sqlserver.jdbc.TDSTokenHandler.onEOF(tdsparser.java:305)
+	at com.microsoft.sqlserver.jdbc.TDSParser.parse(tdsparser.java:138)
+	at com.microsoft.sqlserver.jdbc.TDSParser.parse(tdsparser.java:42)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.sendLogon(SQLServerConnection.java:6490)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.logon(SQLServerConnection.java:5068)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.access$100(SQLServerConnection.java:93)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection$LogonCommand.doExecute(SQLServerConnection.java:5002)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:7685)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:4048)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.connectHelper(SQLServerConnection.java:3487)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.login(SQLServerConnection.java:3077)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.connectInternal(SQLServerConnection.java:2919)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.connect(SQLServerConnection.java:1787)
+	at com.microsoft.sqlserver.jdbc.SQLServerDriver.connect(SQLServerDriver.java:1229)
+	at liquibase.database.jvm.JdbcConnection.open(JdbcConnection.java:83)
+	... 42 more
+

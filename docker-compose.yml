@@ -1,10 +1,27 @@
 version: '3.8'
+
 services:  
+
   sqlserver:
-    platform: linux/amd64
-    build: .
+    platform: linux/amd64    
+    build: 
+      context: .
+      dockerfile: Dockerfile
     environment:
       ACCEPT_EULA: Y
       SA_PASSWORD: DevOpsDaysP4ssword!
     ports:
       - "1433:1433"
+    network_mode: "bridge"
+
+  liquibase:
+    build:
+      context: .
+      dockerfile: Dockerfile.liqui
+    network_mode: "bridge"
+    depends_on: 
+      - sqlserver
+    volumes:
+      - ./changelog:/liquibase/changelog
+    # command: --defaults-file=/liquibase/changelog/liquibase.properties update 
+    # This command is commented out for the demo, but can be enabled for a real dev-ops pipeline.
